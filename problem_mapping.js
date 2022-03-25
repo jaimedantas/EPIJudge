@@ -6,7 +6,7 @@ problem_mapping = {
                 "total": 10001
             },
             "Java: CountBits.java": {
-                "passed": 1,
+                "passed": 10001,
                 "total": 10001
             },
             "Python: count_bits.py": {
