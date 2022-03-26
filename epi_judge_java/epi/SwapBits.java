@@ -4,7 +4,14 @@ import epi.test_framework.GenericTest;
 public class SwapBits {
   @EpiTest(testDataFile = "swap_bits.tsv")
   public static long swapBits(long x, int i, int j) {
-    // TODO - you fill in here.
+    long a=0, b=0;
+    long response = 0;
+    a = 1 & x<<i;
+    b = 1 & x<<j;
+
+    if (a == b){
+      return x;
+    }
     return 0;
   }
 

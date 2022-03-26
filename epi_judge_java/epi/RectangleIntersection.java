@@ -2,6 +2,10 @@ package epi;
 import epi.test_framework.EpiTest;
 import epi.test_framework.EpiUserType;
 import epi.test_framework.GenericTest;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 public class RectangleIntersection {
   @EpiUserType(ctorParams = {int.class, int.class, int.class, int.class})
   public static class Rect {
@@ -51,10 +55,29 @@ public class RectangleIntersection {
       return "[" + x + ", " + y + ", " + width + ", " + height + "]";
     }
   }
+
+
   @EpiTest(testDataFile = "rectangle_intersection.tsv")
   public static Rect intersectRectangle(Rect r1, Rect r2) {
-    // TODO - you fill in here.
-    return new Rect(0, 0, 0, 0);
+
+    Rect response = new Rect(0,0,0,0);
+
+    //check x
+    int xR1 = r1.x + r1.width;
+    int yR1 = r1.y + r1.height;
+    int xR2 = r2.x + r2.width;
+    int yR2 = r2.y + r2.height;
+
+    if (!(r1.x+r1.width >= r2.x && r2.y <= r1.y+r1.height && r2.x+r2.width >= r1.x && r1.y <= r2.y+r2.height)) {
+      return new Rect(0, 0, -1, -1);
+    }
+
+    response.x = Math.max(r2.x, r1.x);
+    response.y = Math.max(r1.y, r2.y);
+    response.width = Math.min(r1.x+r1.width, r2.x+r2.width) - Math.max(r1.x,r2.x);
+    response.height = Math.min(r1.y+r1.height, r2.y+r2.height) - Math.max(r1.y,r2.y);
+
+    return response;
   }
 
   public static void main(String[] args) {
